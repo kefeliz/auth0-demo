@@ -6,9 +6,9 @@ export default function Navbar({
 }) {
   return (
     <nav className="flex items-center justify-between px-6 py-3 bg-gray-900 text-white shadow-md">
-      <a href="/" className="text-xl font-bold">
+      <Link href="/" className="text-xl font-bold">
         Auth0 Demo - Next.js
-      </a>
+      </Link>
 
       <div className="flex items-center gap-4">
         {!user ? (

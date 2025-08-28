@@ -1,12 +1,13 @@
-import { auth0 } from "@/lib/auth0";
-import NotLoggedIn from "../ui/NotLoggedIn";
+"use client";
+import { useAuth } from "@/hooks/useAuth";
 
-export default async function ProfilePage() {
-  const session = await auth0.getSession();
-  const user = session ? session.user : null;
+export default function ProfilePage() {
+  const { user, isLoading } = useAuth();
 
-  if (!session || !user) {
-    return <NotLoggedIn />;
+  if (isLoading) return <p>Loading...</p>;
+
+  if (!user) {
+    return null;
   }
 
   return (
@@ -47,14 +48,6 @@ export default async function ProfilePage() {
           <div className="flex justify-between border-b pb-2">
             <span className="font-medium">ID (sub):</span>
             <span className="truncate max-w-[180px]">{user.sub}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="font-medium">Expires:</span>
-            <span>
-              {typeof session.exp === "number"
-                ? new Date(session.exp * 1000).toLocaleString("es-DO")
-                : "Unknown"}
-            </span>
           </div>
         </div>
 
