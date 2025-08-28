@@ -1,9 +1,10 @@
 import Link from "next/link";
-export default function Navbar({
-  user,
-}: {
+
+interface NavbarProps {
   user: { name: string; picture?: string } | null;
-}) {
+}
+
+export default function Navbar({ user }: NavbarProps) {
   return (
     <nav className="flex items-center justify-between px-6 py-3 bg-gray-900 text-white shadow-md">
       <Link href="/" className="text-xl font-bold">
