@@ -1,7 +1,7 @@
-import type { Metadata } from "next";
+"use client";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { auth0 } from "@/lib/auth0";
+import { useAuth } from "@/hooks/useAuth";
 import Navbar from "./ui/Navbar";
 
 const geistSans = Geist({
@@ -14,28 +14,25 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Auth0 Demo",
-  description: "Auth0 Demo with Next.js 13 and TypeScript",
-};
-
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await auth0.getSession();
+  const { user } = useAuth();
+
   return (
     <html lang="en">
+      <title>Auth0 Demo</title>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Navbar
           user={
-            session?.user
+            user
               ? {
-                  name: session.user.name ?? "Unknown User",
-                  picture: session.user.picture,
+                  name: user.name ?? "Unknown User",
+                  picture: user.picture,
                 }
               : null
           }

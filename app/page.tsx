@@ -1,8 +1,10 @@
-import { auth0 } from "@/lib/auth0";
+"use client";
+import { useAuth } from "@/hooks/useAuth";
 
-export default async function Home() {
-  const session = await auth0.getSession();
-  const user = session?.user;
+export default function Home() {
+  const { user, isLoading } = useAuth();
+
+  if (isLoading) return <p>Loading...</p>;
 
   return (
     <main className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-blue-50 to-white px-6">
