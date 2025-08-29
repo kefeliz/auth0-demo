@@ -1,7 +1,6 @@
 "use client";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { useAuth } from "@/hooks/useAuth";
 import Navbar from "./ui/Navbar";
 
 const geistSans = Geist({
@@ -19,24 +18,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { user } = useAuth();
-
   return (
     <html lang="en">
       <title>Auth0 Demo</title>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Navbar
-          user={
-            user
-              ? {
-                  name: user.name ?? "Unknown User",
-                  picture: user.picture,
-                }
-              : null
-          }
-        />
+        <Navbar />
         {children}
       </body>
     </html>

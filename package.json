@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^4.9.0",
+    "@tabler/icons-react": "^3.34.1",
     "client": "link:@auth0/nextjs-auth0/client",
     "next": "15.5.0",
     "react": "19.1.0",
